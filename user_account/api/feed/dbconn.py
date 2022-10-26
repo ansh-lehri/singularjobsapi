@@ -1,3 +1,4 @@
+import os
 from neo4j import GraphDatabase, basic_auth
 from pymongo import MongoClient
 
@@ -24,7 +25,7 @@ class NeoConnections:
     def __init__(self):
 
         try:
-            self.driver = GraphDatabase.driver("bolt://13.235.24.171:7687",auth=("neo4j", "Kheri@123"))
+            self.driver = GraphDatabase.driver(os.environ.get("NEO4J_URL"),auth=(os.environ.get("NEO4J_DB_NAME"), os.environ.get("NEO4J_DB_PASSWORD")))
             print("Successfully established connection with Neo4j")
         except Exception as e:
             print("Neo4j Error")
