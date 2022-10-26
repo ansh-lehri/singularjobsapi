@@ -544,22 +544,3 @@ def logout(request):
     logout(request)
     
     return Response({"message":"Successfully logged out."})
-
-
-@api_view(['GET',])
-@permission_classes([])
-def urgent_mails(request):
-
-
-    send_to_users = ["asthasachan02@gmail.com","deependra2199@gmail.com","katiyarvishal0011@gmail.com","shubhendras21@gmail.com","anshlehri0599@gmail.com"]
-
-    for user in send_to_users:
-        
-        email_body = 'Hello '+user + "\n\n"+'We would like to apologize for the inconvenience caused while creating Singular Jobs profile earlier today because of LinkedIn URL. Also, during maintenance in night of 9 September 2021, we came around a bug, because of which your skills were not getting created as they were supposed to, which lead to either no or inappropriate job recommendations.\nWe have updated all your skills and have updated your job lists to best case possible.\n\n Once again, we would like to express our most sincere appologies for the inconvenience caused.\n\n\n Singular Jobs'
-        email_data = {'email_body': email_body, 'to_email': user,'email_subject': 'Applogies for inconvenience while using the site.'}
-        
-        Util.send_email(email_data)
-        print("mail sent successfully to: ")
-        print(user)
-        
-    return Response({"msg":"Done"})
